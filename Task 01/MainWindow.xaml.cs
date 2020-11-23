@@ -79,7 +79,7 @@ namespace Task_01
 
             Products[] products = ParseString.GetData(test);
 
-
+            //1
             //10.Необходимо склонировать массив и упорядочить изделия по калорийности
             Products[] сalorie_foods = new Products[products.Length];
             ProductsSort.SortFoodsByCalorieContent(products, ref сalorie_foods);
