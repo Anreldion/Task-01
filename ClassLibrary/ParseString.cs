@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ClassLibrary
@@ -120,7 +119,7 @@ namespace ClassLibrary
         }
 
 
-        
+
         /// <summary>
         /// Разобрать строку содержащую информацию о категории
         /// </summary>
@@ -253,7 +252,7 @@ namespace ClassLibrary
             is_ok = true;
             return product;
         }
-        
+
         /// <summary>
         /// Разобрать строку содержащую информацию об ингредиенте
         /// </summary>

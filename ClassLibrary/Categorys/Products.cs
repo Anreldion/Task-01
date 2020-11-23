@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ClassLibrary
 {
@@ -70,7 +69,7 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public bool Equals(object obj)
+        public override bool Equals(object obj)
         {
             if (obj.GetType() != this.GetType())
             {
@@ -141,7 +140,6 @@ namespace ClassLibrary
                 case CATEGORY_PITA:
                 case CATEGORY_LOAF:
                     return true;
-
                 default:
                     return false;
             }

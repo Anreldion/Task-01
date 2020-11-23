@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ClassLibrary.Categorys
+﻿namespace ClassLibrary.Categorys
 {
     /// <summary>
     /// Булочка

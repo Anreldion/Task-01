@@ -136,17 +136,17 @@ namespace ClassLibrary.Tests
             // arrange
             Products[] products;
             //Калорийность
-            double expected_product_0_calories = 1556.6; 
-            double expected_product_1_calories = 859.13; 
-            double expected_product_2_calories = 646.59; 
-            double expected_product_3_calories = 1092;  
+            double expected_product_0_calories = 1556.6;
+            double expected_product_1_calories = 859.13;
+            double expected_product_2_calories = 646.59;
+            double expected_product_3_calories = 1092;
             double expected_product_4_calories = 1772.6;
 
             double delta = 0.01;
 
             // act
             products = ParseString.GetData(GetManufacturingString());
-            
+
             // assert
             //Проверка калорийности
             Assert.AreEqual(expected_product_0_calories, products[0].Calories, delta);
