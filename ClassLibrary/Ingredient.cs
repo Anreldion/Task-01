@@ -35,5 +35,16 @@
         /// Цена
         /// </summary>
         public double Price { get; set; }
+
+
+        /// <summary>
+        /// Преобразовать данные в строку
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            string text = Name + " " + Value.ToString("f2") + "кг " + Calorie.ToString("f2") + "Дж " + Price.ToString("f2") + "р,\r\n";
+            return text;
+        }
     }
 }
