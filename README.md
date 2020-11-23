@@ -10,6 +10,7 @@ Declaring and calling methods
          ingredient : Name = Соль, Value = 0.01, Calorie = 0, Price = 0.65;
          }
 Структура проекта:
+
 ClassLibrary - Библиотека классов. Содержит:
 - Categorys - Папка содержащая категории продукции (Бублик, Хлеб, Булочка, Лаваш, Батон)
 - Products - Абстрактный класс. Наследуется классами Bread, Bagel, Bun, Pita, Loaf.
