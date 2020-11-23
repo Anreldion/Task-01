@@ -6,7 +6,7 @@ using System.Windows;
 namespace ClassLibrary
 {
     /// <summary>
-    /// РАБОТА С ПАПКАМИ И ФАЙЛАМИ
+    /// Работа с папками и файлами
     /// </summary>
     class FoldersAndFiles
     {

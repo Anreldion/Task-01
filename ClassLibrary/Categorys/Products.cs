@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace ClassLibrary
 {
+    /// <summary>
+    /// Хлебобулочные изделия
+    /// </summary>
     public abstract class Products
     {
         /// <summary>
@@ -57,7 +60,7 @@ namespace ClassLibrary
         /// <summary>
         /// Получить числовое значение продукта
         /// </summary>
-        /// <returns>Возвращает HashCode продукта</returns>
+        /// <returns>Возвращает Hash Code продукта</returns>
         public override int GetHashCode()
         {
             return CompositionList.GetHashCode() + Calories.GetHashCode() + Price.GetHashCode() + MarginCoefficient.GetHashCode() + CategoryName.GetHashCode() + ProductName.GetHashCode();

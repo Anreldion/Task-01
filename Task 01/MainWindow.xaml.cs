@@ -1,18 +1,5 @@
 ﻿using ClassLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Task_01
 {
@@ -79,7 +66,6 @@ namespace Task_01
 
             Products[] products = ParseString.GetData(test);
 
-            //1
             //10.Необходимо склонировать массив и упорядочить изделия по калорийности
             Products[] сalorie_foods = new Products[products.Length];
             ProductsSort.SortFoodsByCalorieContent(products, ref сalorie_foods);
@@ -90,15 +76,15 @@ namespace Task_01
 
             //12. Найти в массиве все изделия, равные данному, если в качестве критерия использовать равенство по цене и калорийности
             Products[] find_foods_by_price_and_by_calorie = new Products[products.Length];
-            ProductsSort.FindFoodsByPriceAndByCalorieContent(700, 0.7, products, ref find_foods_by_price_and_by_calorie);
+            ProductsSort.FindFoodsByPriceAndByCalorieContent(1092, 0.6376, products, ref find_foods_by_price_and_by_calorie);
 
             //13. Найти в массиве все изделия, у которых объём использования заданного ингредиента больше указанной величины
             Products[] find_foods_bigest_then_value = new Products[products.Length];
-            ProductsSort.FindFoodsBigestThenValueIngredient("Сахар", 45, products, ref find_foods_bigest_then_value);
+            ProductsSort.FindFoodsBigestThenValueIngredient("Сахар", 0.005, products, ref find_foods_bigest_then_value);
 
             //14. Найти в массиве все изделия, у которых число ингредиентов больше заданной величины
             Products[] find_foods_number_ingredients_greater_than_the_value = new Products[products.Length];
-            ProductsSort.FindFoodsNumberIngredientsGreaterThanTheValue(1, products, find_foods_number_ingredients_greater_than_the_value);
+            ProductsSort.FindFoodsNumberIngredientsGreaterThanTheValue(3, products, find_foods_number_ingredients_greater_than_the_value);
 
 
         }

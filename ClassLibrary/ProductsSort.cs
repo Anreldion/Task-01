@@ -10,7 +10,11 @@ namespace ClassLibrary
     /// </summary>
     public class ProductsSort
     {
-        //Cклонировать массив и упорядочить изделия по калорийности
+        /// <summary>
+        /// Cклонировать массив и упорядочить изделия по калорийности
+        /// </summary>
+        /// <param name="sourceArray">Исходный массив</param>
+        /// <param name="destinationArray">Ссылка на массив, для отсортированных данных</param>
         static public void SortFoodsByCalorieContent(Products[] sourceArray, ref Products[] destinationArray)
         {
             //Клонируем массив
@@ -19,7 +23,11 @@ namespace ClassLibrary
             Array.Sort(destinationArray, new SortByCalories());
         }
 
-        //Необходимо скопировать массив и упорядочить изделия по стоимости
+        /// <summary>
+        /// Необходимо скопировать массив и упорядочить изделия по стоимости
+        /// </summary>
+        /// <param name="sourceArray">Источник данных</param>
+        /// <param name="destinationArray">Приемник данных</param>
         static public void SortFoodsByPrice(Products[] sourceArray, ref Products[] destinationArray)
         {
             //Копируем массив
@@ -28,19 +36,34 @@ namespace ClassLibrary
             Array.Sort(destinationArray, new SortByPrice());
         }
 
-        //Найти в массиве все изделия, равные данному, если в качестве критерия использовать равенство по цене и калорийности
-        static public void FindFoodsByPriceAndByCalorieContent(double calories, double price, Products[] sourceArray, ref Products[] destinationArray)
+        /// <summary>
+        /// Найти в массиве все изделия, равные данному, если в качестве критерия использовать равенство по цене и калорийности
+        /// </summary>
+        /// <param name="calories">Значение калорийности</param>
+        /// <param name="prices">Значение цены</param>
+        /// <param name="sourceArray">Источник данных</param>
+        /// <param name="destinationArray">Приемник данных</param>
+        static public void FindFoodsByPriceAndByCalorieContent(double calories, double prices, Products[] sourceArray, ref Products[] destinationArray)
         {
             int index = 0;
+            int calorie = (int)(calories * 100.0);//убираем дробную часть
+            int price = (int)(prices * 100.0);//убираем дробную часть;
+
             foreach (var item in sourceArray)
             {
-                if (calories == item.Calories && price == item.Price)
+                if (calorie == (int)(item.Calories * 100.0) && price == (int)(item.Price * 100.0))
                 {
                     destinationArray[index++] = item;
                 }
             }
         }
-        //Найти в массиве все изделия, у которых объём использования заданного ингредиента больше указанной величины
+        /// <summary>
+        /// Найти в массиве все изделия, у которых объём использования заданного ингредиента больше указанной величины
+        /// </summary>
+        /// <param name="name">Наименование ингридиента</param>
+        /// <param name="value">Количество ингредиента</param>
+        /// <param name="sourceArray">Источник данных</param>
+        /// <param name="destinationArray">Приемник данных</param>
         static public void FindFoodsBigestThenValueIngredient(string name, double value, Products[] sourceArray, ref Products[] destinationArray)
         {
             int index = 0;
@@ -59,7 +82,12 @@ namespace ClassLibrary
                 }
             }
         }
-        // Найти в массиве все изделия, у которых число ингредиентов больше заданной величины
+        /// <summary>
+        /// Найти в массиве все изделия, у которых число ингредиентов больше заданной величины
+        /// </summary>
+        /// <param name="value">Число ингредиентов</param>
+        /// <param name="sourceArray">Источник данных</param>
+        /// <param name="destinationArray">Приемник данных</param>
         static public void FindFoodsNumberIngredientsGreaterThanTheValue(double value, Products[] sourceArray, Products[] destinationArray)
         {
             int index = 0;
@@ -72,6 +100,9 @@ namespace ClassLibrary
             }
         }
     }
+    /// <summary>
+    /// Интерфейс сортировки по калорийности
+    /// </summary>
     public class SortByCalories : IComparer<Products>
     {
         public int Compare(Products o1, Products o2)
@@ -79,7 +110,9 @@ namespace ClassLibrary
             return o1.Calories.CompareTo(o2.Calories);
         }
     }
-
+    /// <summary>
+    /// Интерфейс сортировки по цене
+    /// </summary>
     public class SortByPrice : IComparer<Products>
     {
         public int Compare(Products o1, Products o2)

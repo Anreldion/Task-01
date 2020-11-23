@@ -14,7 +14,7 @@ namespace ClassLibrary
     {
         /*
          * Формат данных:
-                "{" + //Лаваш
+                "{" + 
                 "category : CategoryName = Pita, ProductName = Грузинский, Quantity = 10;" +
                 "ingredient : Name = Мука, Value = 0.3, Calorie = 364, Price = 1.39;" +
                 "ingredient : Name = Вода, Value = 0.1, Calorie = 0, Price = 0.016;" +
@@ -22,6 +22,7 @@ namespace ClassLibrary
                 "}" +
          * и т.д.
          */
+
         /// <summary>
         /// Получить данные о производстве из строки.
         /// </summary>
@@ -119,7 +120,7 @@ namespace ClassLibrary
         }
 
 
-        //"category" : CategoryName = Bread, ProductName = Волотовской,  Quantity = 10, Unit = шт, MarginCoefficient = 1.1;
+        
         /// <summary>
         /// Разобрать строку содержащую информацию о категории
         /// </summary>
@@ -128,6 +129,9 @@ namespace ClassLibrary
         /// <returns>Возвращает Products</returns>
         static Products ParseCategory(string input_string, ref bool is_ok)
         {
+            //Формат 
+            //"category : CategoryName = Bread, ProductName = Волотовской, Quantity = 10;"
+
             Products product = new Bread();
             int positions = input_string.LastIndexOf(':');//Определяем позицию после двоеточия
             string edit_string = input_string.Substring(positions + 1);
@@ -249,7 +253,7 @@ namespace ClassLibrary
             is_ok = true;
             return product;
         }
-        //"ingredient" : Name = Тесто, Value = 100, Unit = г, Calorie = 336, Price = 50;
+        
         /// <summary>
         /// Разобрать строку содержащую информацию об ингредиенте
         /// </summary>
@@ -257,6 +261,9 @@ namespace ClassLibrary
         /// <returns>Возвращает Ingredient</returns>
         static Ingredient ParseIngredient(string input_string)
         {
+            //Формат
+            //"ingredient : Name = Мука, Value = 0.3, Calorie = 364, Price = 1.39;"
+
             Ingredient ingredient = new Ingredient();
 
             //Определяем позицию после двоеточия

@@ -6,15 +6,6 @@ namespace ClassLibrary.Tests
     [TestClass]
     public class LoadFromFileTests
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-            // arrange
-
-            // act
-
-            // assert
-        }
         /// <summary>
         /// Получить строку с информацией о производстве
         /// </summary>
@@ -74,6 +65,9 @@ namespace ClassLibrary.Tests
         //**************************************************************************************************************
         // PARSE STRING TESTS
         //**************************************************************************************************************
+        /// <summary>
+        /// Получить данные о производстве из строки.
+        /// </summary>
         [TestMethod]
         public void GetData_Test()
         {
@@ -108,35 +102,32 @@ namespace ClassLibrary.Tests
         //**************************************************************************************************************
         // PRODUCTS Calories and Prices TESTS
         //**************************************************************************************************************
-
+        /// <summary>
+        /// 
+        /// </summary>
         [TestMethod]
         public void GetPrice_Test()
         {
             // arrange
             Products[] products;
             //Цена
-            int expected_product_0_price = (int)(0.7659 * 100.0); //убираем дробную часть
-            int expected_product_1_price = (int)(0.9306 * 100.0);
-            int expected_product_2_price = (int)(0.3154 * 100.0);
-            int expected_product_3_price = (int)(0.6376 * 100.0);
-            int expected_product_4_price = (int)(1.0631 * 100.0);
+            double expected_product_0_price = 0.7659; //убираем дробную часть
+            double expected_product_1_price = 0.9306;
+            double expected_product_2_price = 0.3154;
+            double expected_product_3_price = 0.6376;
+            double expected_product_4_price = 1.0631;
+
+            double delta = .001;
 
             // act
             products = ParseString.GetData(GetManufacturingString());
-            //Цена
-            int product_0_price = (int)(products[0].Price * 100.0); //убираем дробную часть
-            int product_1_price = (int)(products[1].Price * 100.0);
-            int product_2_price = (int)(products[2].Price * 100.0);
-            int product_3_price = (int)(products[3].Price * 100.0);
-            int product_4_price = (int)(products[4].Price * 100.0);
-
             // assert
             //Проверка цены
-            Assert.AreEqual(expected_product_0_price, product_0_price);
-            Assert.AreEqual(expected_product_1_price, product_1_price);
-            Assert.AreEqual(expected_product_2_price, product_2_price);
-            Assert.AreEqual(expected_product_3_price, product_3_price);
-            Assert.AreEqual(expected_product_4_price, product_4_price);
+            Assert.AreEqual(expected_product_0_price, products[0].Price, delta);
+            Assert.AreEqual(expected_product_1_price, products[1].Price, delta);
+            Assert.AreEqual(expected_product_2_price, products[2].Price, delta);
+            Assert.AreEqual(expected_product_3_price, products[3].Price, delta);
+            Assert.AreEqual(expected_product_4_price, products[4].Price, delta);
         }
 
         [TestMethod]
@@ -145,28 +136,24 @@ namespace ClassLibrary.Tests
             // arrange
             Products[] products;
             //Калорийность
-            int expected_product_0_calories = (int)(1556.6 * 100.0); //убираем дробную часть
-            int expected_product_1_calories = (int)(859.13 * 100.0);
-            int expected_product_2_calories = (int)(646.59 * 100.0);
-            int expected_product_3_calories = (int)(1092 * 100.0);
-            int expected_product_4_calories = (int)(1772.6 * 100.0);
+            double expected_product_0_calories = 1556.6; 
+            double expected_product_1_calories = 859.13; 
+            double expected_product_2_calories = 646.59; 
+            double expected_product_3_calories = 1092;  
+            double expected_product_4_calories = 1772.6;
+
+            double delta = 0.01;
 
             // act
             products = ParseString.GetData(GetManufacturingString());
-            //Калорийность
-            int product_0_calories = (int)(products[0].Calories * 100.0); //убираем дробную часть
-            int product_1_calories = (int)(products[1].Calories * 100.0);
-            int product_2_calories = (int)(products[2].Calories * 100.0);
-            int product_3_calories = (int)(products[3].Calories * 100.0);
-            int product_4_calories = (int)(products[4].Calories * 100.0);
-
+            
             // assert
             //Проверка калорийности
-            Assert.AreEqual(expected_product_0_calories, product_0_calories);
-            Assert.AreEqual(expected_product_1_calories, product_1_calories);
-            Assert.AreEqual(expected_product_2_calories, product_2_calories);
-            Assert.AreEqual(expected_product_3_calories, product_3_calories);
-            Assert.AreEqual(expected_product_4_calories, product_4_calories);
+            Assert.AreEqual(expected_product_0_calories, products[0].Calories, delta);
+            Assert.AreEqual(expected_product_1_calories, products[1].Calories, delta);
+            Assert.AreEqual(expected_product_2_calories, products[2].Calories, delta);
+            Assert.AreEqual(expected_product_3_calories, products[3].Calories, delta);
+            Assert.AreEqual(expected_product_4_calories, products[4].Calories, delta);
         }
 
         //**************************************************************************************************************
@@ -176,37 +163,87 @@ namespace ClassLibrary.Tests
         public void CategorysMarginCoefficient_Test()
         {
             // arrange
-            int bun_margin_coefficient_expected = (int)(1.1 * 100.0); //убираем дробную часть
-            int bread_margin_coefficient_expected = (int)(1.2 * 100.0);
-            int loaf_margin_coefficient_expected = (int)(1.3 * 100.0);
-            int bagel_margin_coefficient_expected = (int)(1.4 * 100.0);
-            int pita_margin_coefficient_expected = (int)(1.5 * 100.0);
+            double bun_margin_coefficient_expected = 1.1;
+            double bread_margin_coefficient_expected = 1.2;
+            double loaf_margin_coefficient_expected = 1.3;
+            double bagel_margin_coefficient_expected = 1.4;
+            double pita_margin_coefficient_expected = 1.5;
+
+            double delta = 0.1;
+
             // act
             Products bread = new Bread();
             Products bagel = new Bagel();
             Products bun = new Bun();
             Products pita = new Pita();
             Products loaf = new Loaf();
-            int bun_margin_coefficient = (int)(bun.MarginCoefficient * 100.0); //убираем дробную часть
-            int bread_margin_coefficient = (int)(bread.MarginCoefficient * 100.0);
-            int loaf_margin_coefficient = (int)(loaf.MarginCoefficient * 100.0);
-            int bagel_margin_coefficient = (int)(bagel.MarginCoefficient * 100.0);
-            int pita_margin_coefficient = (int)(pita.MarginCoefficient * 100.0);
+
             // assert
-            Assert.AreEqual(bun_margin_coefficient_expected, bun_margin_coefficient);
-
-            Assert.AreEqual(bread_margin_coefficient_expected, bread_margin_coefficient);
-
-            Assert.AreEqual(loaf_margin_coefficient_expected, loaf_margin_coefficient);
-
-            Assert.AreEqual(bagel_margin_coefficient_expected, bagel_margin_coefficient);
-
-            Assert.AreEqual(pita_margin_coefficient_expected, pita_margin_coefficient);
+            Assert.AreEqual(bun_margin_coefficient_expected, bun.MarginCoefficient, delta);
+            Assert.AreEqual(bread_margin_coefficient_expected, bread.MarginCoefficient, delta);
+            Assert.AreEqual(loaf_margin_coefficient_expected, loaf.MarginCoefficient, delta);
+            Assert.AreEqual(bagel_margin_coefficient_expected, bagel.MarginCoefficient, delta);
+            Assert.AreEqual(pita_margin_coefficient_expected, pita.MarginCoefficient, delta);
         }
 
         //**************************************************************************************************************
         // PRODUCTS SORT TESTS
         //**************************************************************************************************************
+        /*
+         По умолчанию до операций сортировки, после получения данных из строки, массив имеет следующий вид (.ToString())
+         [0]    
+            {  
+                Волотовской 10,00шт 1556,60Дж 0,77р,
+                Состав: Мука 0,30кг 364,00Дж 1,39р,
+                Соль 0,01кг 0,00Дж 0,65р,
+                Сахар 0,01кг 387,00Дж 1,59р,
+                Дрожжи 0,00кг 325,00Дж 7,50р,
+                Масло 0,05кг 884,00Дж 3,89р,
+                Вода 0,30кг 0,00Дж 0,02р,
+             }
+        [1]
+            {    Русский 10,00шт 859,13Дж 0,93р,
+                Состав: Мука 0,01кг 364,00Дж 1,39р,
+                Сахар 0,01кг 387,00Дж 1,59р,
+                Соль 0,01кг 0,00Дж 0,65р,
+                Масло 0,05кг 884,00Дж 3,89р,
+                Маргарин 0,05кг 717,00Дж 8,22р,
+                Ванилин 0,00кг 288,00Дж 30,90р,
+            }
+        [2]
+            {   
+                Вкусная 10,00шт 646,60Дж 0,32р,
+                Состав: Мука 0,05кг 364,00Дж 1,39р,
+                Сахар 0,01кг 387,00Дж 1,59р,
+                Дрожжи 0,00кг 325,00Дж 7,50р,
+                Вода 0,05кг 0,00Дж 0,02р,
+                Масло 0,05кг 884,00Дж 3,89р,
+                Соль 0,01кг 0,00Дж 0,65р,
+            }
+        [3]
+            {
+                Грузинский 10,00шт 1092,00Дж 0,64р,
+                Состав: Мука 0,30кг 364,00Дж 1,39р,
+                Вода 0,10кг 0,00Дж 0,02р,
+                Соль 0,01кг 0,00Дж 0,65р,
+            }
+        [4]
+            {
+                Нарезной 10,00шт 1772,60Дж 1,06р,
+                Состав: Мука 0,30кг 364,00Дж 1,39р,
+                Масло 0,05кг 884,00Дж 3,89р,
+                Вода 0,30кг 0,00Дж 0,02р,
+                Соль 0,01кг 0,00Дж 0,65р,
+                Сахар 0,05кг 387,00Дж 1,59р,
+                Дрожжи 0,00кг 325,00Дж 7,50р,
+                Яйца 0,03кг 155,00Дж 4,00р,
+            }
+
+         */
+
+        /// <summary>
+        /// Cклонировать массив и упорядочить изделия по калорийности
+        /// </summary>
         [TestMethod]
         public void SortFoodsByCalorieContent_Test()
         {
@@ -214,13 +251,29 @@ namespace ClassLibrary.Tests
             Products[] products;
             Products[] сalorie_foods;
 
+            double product_0_expected_сalorie = 646.599;
+            double product_1_expected_сalorie = 859.13;
+            double product_2_expected_сalorie = 1092;
+            double product_3_expected_сalorie = 1556.6;
+            double product_4_expected_сalorie = 1772.6;
+
+            double delta = 0.001;
+
             // act
             products = ParseString.GetData(GetManufacturingString());
             сalorie_foods = new Products[products.Length];
             ProductsSort.SortFoodsByCalorieContent(products, ref сalorie_foods);
             // assert
-
+            Assert.AreEqual(product_0_expected_сalorie, сalorie_foods[0].Calories, delta);
+            Assert.AreEqual(product_1_expected_сalorie, сalorie_foods[1].Calories, delta);
+            Assert.AreEqual(product_2_expected_сalorie, сalorie_foods[2].Calories, delta);
+            Assert.AreEqual(product_3_expected_сalorie, сalorie_foods[3].Calories, delta);
+            Assert.AreEqual(product_4_expected_сalorie, сalorie_foods[4].Calories, delta);
         }
+
+        /// <summary>
+        /// Cкопировать массив и упорядочить изделия по стоимости
+        /// </summary>
         [TestMethod]
         public void SortFoodsByPrice_Test()
         {
@@ -228,13 +281,30 @@ namespace ClassLibrary.Tests
             Products[] products;
             Products[] price_foods;
 
+            double product_0_expected_price = 0.315425;
+            double product_1_expected_price = 0.6376;
+            double product_2_expected_price = 0.7659;
+            double product_3_expected_price = 0.93065;
+            double product_4_expected_price = 1.06313;
+
+            double delta = 0.001;
+
             // act
             products = ParseString.GetData(GetManufacturingString());
             price_foods = new Products[products.Length];
             ProductsSort.SortFoodsByPrice(products, ref price_foods);
 
             // assert
+            Assert.AreEqual(product_0_expected_price, price_foods[0].Price, delta);
+            Assert.AreEqual(product_1_expected_price, price_foods[1].Price, delta);
+            Assert.AreEqual(product_2_expected_price, price_foods[2].Price, delta);
+            Assert.AreEqual(product_3_expected_price, price_foods[3].Price, delta);
+            Assert.AreEqual(product_4_expected_price, price_foods[4].Price, delta);
         }
+
+        /// <summary>
+        /// Найти в массиве все изделия, равные данному, если в качестве критерия использовать равенство по цене и калорийности
+        /// </summary>
         [TestMethod]
         public void FindFoodsByPriceAndByCalorieContent_Test()
         {
@@ -242,40 +312,71 @@ namespace ClassLibrary.Tests
             Products[] products;
             Products[] find_foods_by_price_and_by_calorie;
 
+            double expected_сalorie = 1092;
+            double expected_price = 0.6376;
+            string expected_product_name = "Грузинский";
+            double delta = 0.001;
             // act
             products = ParseString.GetData(GetManufacturingString());
             find_foods_by_price_and_by_calorie = new Products[products.Length];
-            ProductsSort.FindFoodsByPriceAndByCalorieContent(700, 0.7, products, ref find_foods_by_price_and_by_calorie);
+            ProductsSort.FindFoodsByPriceAndByCalorieContent(expected_сalorie, expected_price, products, ref find_foods_by_price_and_by_calorie);
 
             // assert
+            Assert.AreEqual(expected_сalorie, find_foods_by_price_and_by_calorie[0].Calories, delta);
+            Assert.AreEqual(expected_price, find_foods_by_price_and_by_calorie[0].Price, delta);
+            // Должен определиться Грузинский
+            Assert.AreEqual(expected_product_name, find_foods_by_price_and_by_calorie[0].ProductName);
+
         }
+
+        /// <summary>
+        /// Найти в массиве все изделия, у которых объём использования заданного ингредиента больше указанной величины
+        /// </summary>
         [TestMethod]
         public void FindFoodsBigestThenValueIngredient_Test()
         {
             // arrange
             Products[] products;
             Products[] find_foods_bigest_then_value;
-
+            string ingredient = "Сахар";
+            double ingredient_val = 0.005;
+            string expected_product_name = "Нарезной";
             // act
             products = ParseString.GetData(GetManufacturingString());
             find_foods_bigest_then_value = new Products[products.Length];
-            ProductsSort.FindFoodsBigestThenValueIngredient("Сахар", 45, products, ref find_foods_bigest_then_value);
+            ProductsSort.FindFoodsBigestThenValueIngredient(ingredient, ingredient_val, products, ref find_foods_bigest_then_value);
 
             // assert
+            // Должен определиться Нарезной
+            Assert.AreEqual(expected_product_name, find_foods_bigest_then_value[0].ProductName);
         }
+
+        /// <summary>
+        /// Найти в массиве все изделия, у которых число ингредиентов больше заданной величины
+        /// </summary>
         [TestMethod]
         public void FindFoodsNumberIngredientsGreaterThanTheValue_Test()
         {
             // arrange
             Products[] products;
             Products[] find_foods_number_ingredients_greater_than_the_value;
+            int count = 0;
+            int expected_quantity = 4;
 
             // act
             products = ParseString.GetData(GetManufacturingString());
             find_foods_number_ingredients_greater_than_the_value = new Products[products.Length];
-            ProductsSort.FindFoodsNumberIngredientsGreaterThanTheValue(1, products, find_foods_number_ingredients_greater_than_the_value);
+            ProductsSort.FindFoodsNumberIngredientsGreaterThanTheValue(3, products, find_foods_number_ingredients_greater_than_the_value);
+            foreach (var item in find_foods_number_ingredients_greater_than_the_value)
+            {
+                if (item != null)
+                {
+                    count++;
+                }
+            }
 
             // assert
+            Assert.AreEqual(expected_quantity, count);
         }
     }
 }
