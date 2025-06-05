@@ -1,6 +1,6 @@
 ﻿namespace ClassLibrary.enums
 {
-    public enum ProductCategories
+    public enum ProductCategory
     {
         Pita,
         Bread,
