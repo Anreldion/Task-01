@@ -8,65 +8,65 @@ using ClassLibrary.Utilities;
 namespace ClassLibrary.Products
 {
     /// <summary>
-    /// Baked Product
+    /// Represents a baked product such as bread, pita, or loaf.
     /// </summary>
     public class BakedProduct : IBakedProduct, ICloneable
     {
         /// <summary>
-        /// Name
+        /// Gets or sets the name of the product.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Product category
+        /// Gets or sets the category of the baked product.
         /// </summary>
-        public ProductCategories ProductCategory { get; set; }
+        public ProductCategory ProductCategory { get; set; }
 
         /// <summary>
-        /// Margin coefficient
+        /// Gets or sets the markup applied to the product price.
         /// </summary>
-        public double MarginCoefficient { get; set; }
+        public double Markup { get; set; }
 
 
         /// <summary>
-        /// List of Ingredients
+        /// Gets or sets the list of ingredients in the product.
         /// </summary>
         public List<Ingredient> Ingredients { get; set; }
 
-        public BakedProduct()
-        {
-        }
+        public BakedProduct() { }
 
-        public BakedProduct(string name, ProductCategories categories, double marginCoefficient, List<Ingredient> ingredients)
+        public BakedProduct(string name, ProductCategory category, double markup, List<Ingredient> ingredients)
         {
             Guard.NotNull(name, nameof(name));
             Guard.NotNull(ingredients, nameof(ingredients));
             Guard.NotEmpty(ingredients, nameof(ingredients));
 
             Name = name;
-            ProductCategory = categories;
-            MarginCoefficient = marginCoefficient;
+            ProductCategory = category;
+            Markup = markup;
             Ingredients = ingredients;
         }
 
         /// <summary>
-        /// Get calories
+        /// Calculates the total caloric value of the product.
         /// </summary>
         public double GetCalories() => Ingredients.Sum(item => item.Calorie * item.Weight);
 
         /// <summary>
-        /// Price Calculate
+        /// Calculates the total price of the product including markup.
         /// </summary>
         public double GetPrice()
         {
             var price = Ingredients.Sum(item => item.Price * item.Weight);
-            price *= MarginCoefficient; 
+            price *= Markup; 
             return price; 
         }
-
+        /// <summary>
+        /// Creates a deep copy of the baked product, including its ingredients.
+        /// </summary>
         public object Clone()
         {
-            return new BakedProduct(Name, ProductCategory, MarginCoefficient,
+            return new BakedProduct(Name, ProductCategory, Markup,
                 Ingredients.Select(ing => (Ingredient) ing.Clone()).ToList());
         }
 
@@ -78,14 +78,14 @@ namespace ClassLibrary.Products
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Ingredients, MarginCoefficient, ProductCategory, Name);
+            return HashCode.Combine(Ingredients, Markup, ProductCategory, Name);
         }
 
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
             return obj is BakedProduct item && item.Name == Name && item.ProductCategory == ProductCategory &&
-                   Math.Abs(item.MarginCoefficient - MarginCoefficient) < 0.01 && item.Ingredients.OrderBy(i => i.Name)
+                   Math.Abs(item.Markup - Markup) < 0.01 && item.Ingredients.OrderBy(i => i.Name)
                        .SequenceEqual(Ingredients.OrderBy(i => i.Name));
         }
     }

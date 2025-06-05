@@ -4,16 +4,11 @@ using System;
 namespace ClassLibrary.Ingredients
 {
     /// <summary>
-    /// Ingredient.
+    /// Represents a single ingredient used in a baked product.
     /// </summary>
     public class Ingredient : ICloneable
     {
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
-        public Ingredient()
-        {
-        }
+        public Ingredient() { }
 
         public Ingredient(string name, double calorie, double price, double weight)
         {
@@ -29,25 +24,28 @@ namespace ClassLibrary.Ingredients
         }
 
         /// <summary>
-        /// Name
+        /// Gets or sets the name of the ingredient.
         /// </summary>
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// Calorie
+        /// Gets or sets the caloric value per 1 unit of weight.
         /// </summary>
         public double Calorie { get; set; }
 
         /// <summary>
-        /// Price
+        /// Gets or sets the price per unit of weight.
         /// </summary>
         public double Price { get; set; }
 
         /// <summary>
-        /// Weight
+        /// Gets or sets the weight used in the product.
         /// </summary>
         public double Weight { get; set; }
 
+        /// <summary>
+        /// Creates a deep copy of the ingredient.
+        /// </summary>
         public object Clone()
         {
             return new Ingredient(Name, Calorie, Price, Weight);
