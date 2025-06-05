@@ -4,10 +4,11 @@ namespace ClassLibrary.Services.Interfaces
 {
     public interface IProductFinding
     {
-        BakedProduct[] FindProductsByPriceAndByCalorieContent(BakedProduct[] inputArray, double calories, double prices);
+        BakedProduct[] FindByPriceAndCalories(BakedProduct[] inputArray, BakedProduct product);
 
-        BakedProduct[] FindFoodsBigestThenValueIngredient(BakedProduct[] inputArray, string name, double value);
+        BakedProduct[] FindByIngredientWeightThreshold(BakedProduct[] inputArray, string ingredientName,
+            double weight);
 
-        BakedProduct[] FindFoodsNumberIngredientsGreaterThanTheValue(BakedProduct[] inputArray, int value);
+        BakedProduct[] FindByIngredientCountThreshold(BakedProduct[] inputArray, int value);
     }
 }
