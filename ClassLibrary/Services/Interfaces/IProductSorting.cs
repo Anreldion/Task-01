@@ -4,7 +4,7 @@ namespace ClassLibrary.Services.Interfaces
 {
     public interface IProductSorting
     {
-        BakedProduct[] CloneAndSortByCalorie(BakedProduct[] input);
-        BakedProduct[] CopyAndSortByPrice(BakedProduct[] input);
+        BakedProduct[] CloneAndSortByCalories(BakedProduct[] products);
+        BakedProduct[] CopyAndSortByPrice(BakedProduct[] products);
     }
 }

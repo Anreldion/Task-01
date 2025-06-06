@@ -1,59 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using ClassLibrary.Products;
 using ClassLibrary.Services.Interfaces;
+using ClassLibrary.Utilities;
 
 namespace ClassLibrary.Services
 {
     /// <summary>
-    /// Выполнение операций сортировки
+    /// Provides sorting operations for arrays of baked products.
     /// </summary>
     public class ProductSorting : IProductSorting
     {
         /// <summary>
-        /// Клонировать массив и упорядочить изделия по калорийности
+        /// Creates a deep copy of the array and sorts the products by total calories.
         /// </summary>
-        /// <param name="input">Исходный массив</param>
-        public BakedProduct[] CloneAndSortByCalorie(BakedProduct[] input)
+        /// <param name="products">The source array of products.</param>
+        /// <returns>A new array sorted by caloric content in ascending order.</returns>
+        public BakedProduct[] CloneAndSortByCalories(BakedProduct[] products)
         {
-            var output = (BakedProduct[])input.Clone();
-            Array.Sort(output, new SortByCalories());
-            return output;
+            Guard.NotNull(products, nameof(products));
+
+            var cloned = products.Select(p => (BakedProduct)p.Clone()).ToArray();
+            return cloned.OrderBy(p => p.GetCalories()).ToArray();
         }
 
         /// <summary>
-        /// Необходимо копировать массив и упорядочить изделия по стоимости
+        /// Creates a shallow copy of the array and sorts the products by total price.
         /// </summary>
-        /// <param name="input">Источник данных</param>
-        /// <param name="destinationArray">Приемник данных</param>
-        public BakedProduct[] CopyAndSortByPrice(BakedProduct[] input)
+        /// <param name="products">The source array of products.</param>
+        /// <returns>A new array sorted by price in ascending order.</returns>
+        public BakedProduct[] CopyAndSortByPrice(BakedProduct[] products)
         {
-            var output = new BakedProduct[input.Length];
-            Array.Copy(input, output, input.Length);
-            Array.Sort(output, new SortByPrice());
-            return output;
-        }
-    }
-    /// <summary>
-    /// Интерфейс сортировки по калорийности
-    /// </summary>
-    public class SortByCalories : IComparer<BakedProduct>
-    {
-        public int Compare(BakedProduct o1, BakedProduct o2)
-        {
-            return o1.Calories.CompareTo(o2.Calories);
-        }
-    }
-    /// <summary>
-    /// Интерфейс сортировки по цене
-    /// </summary>
-    public class SortByPrice : IComparer<BakedProduct>
-    {
-        public int Compare(BakedProduct o1, BakedProduct o2)
-        {
-            return o1.Price.CompareTo(o2.Price);
+            Guard.NotNull(products, nameof(products));
+
+            var copied = new BakedProduct[products.Length];
+            Array.Copy(products, copied, products.Length);
+            return copied.OrderBy(p => p.GetPrice()).ToArray();
         }
     }
 }
-
-
