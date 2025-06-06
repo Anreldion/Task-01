@@ -1,12 +1,10 @@
-﻿using System;
-using ClassLibrary.Products;
-using System.Collections.Generic;
+﻿using ClassLibrary.Products;
 
 namespace ClassLibrary.Services.Interfaces
 {
     public interface IParser
     {
-        string Serialize(BakeryProduct[] input);
-        BakeryProduct[] Deserialize(string input);
+        string Serialize(BakedProduct[] input);
+        BakedProduct[] Deserialize(string input);
     }
 }

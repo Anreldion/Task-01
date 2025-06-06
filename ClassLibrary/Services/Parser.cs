@@ -2,29 +2,40 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using ClassLibrary.Products;
+using System.Text.Json.Serialization;
+using ClassLibrary.Utilities;
 
 namespace ClassLibrary.Services
 {
+    /// <summary>
+    /// Provides functionality to convert baked product arrays to and from JSON,
+    /// including support for enums and case-insensitive properties.
+    /// </summary>
     public class Parser : IParser
     {
-        public BakeryProduct[] Deserialize(string input)
+        private static readonly JsonSerializerOptions Options = new JsonSerializerOptions
         {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            };
+            PropertyNameCaseInsensitive = true,
+            WriteIndented = true,
+        };
 
-            return JsonSerializer.Deserialize<List<BakeryProduct>>(input, options).ToArray();
+        static Parser()
+        {
+            Options.Converters.Add(new JsonStringEnumConverter());
         }
 
-        public string Serialize(BakeryProduct[] input)
+        public BakedProduct[] Deserialize(string input)
         {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            };
+            return string.IsNullOrWhiteSpace(input)
+                ? []
+                : JsonSerializer.Deserialize<List<BakedProduct>>(input, Options).ToArray();
+        }
 
-            return JsonSerializer.Serialize(input, options);
+        public string Serialize(BakedProduct[] input)
+        {
+            Guard.NotNull(input, nameof(input));
+
+            return JsonSerializer.Serialize(input, Options);
         }
     }
 }
