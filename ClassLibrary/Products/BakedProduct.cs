@@ -66,7 +66,7 @@ namespace ClassLibrary.Products
         /// </summary>
         public object Clone()
         {
-            return new BakedProduct(Name, ProductCategory, Markup,
+            return new BakedProduct(new string(Name), ProductCategory, Markup,
                 Ingredients.Select(ing => (Ingredient) ing.Clone()).ToList());
         }
 
@@ -78,7 +78,12 @@ namespace ClassLibrary.Products
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Ingredients, Markup, ProductCategory, Name);
+            var ingredientHash = Ingredients?
+                .OrderBy(i => i.Name)
+                .Select(i => i.GetHashCode())
+                .Aggregate(0, HashCode.Combine) ?? 0;
+
+            return HashCode.Combine(ingredientHash, Markup, ProductCategory, Name ?? string.Empty);
         }
 
         public override bool Equals(object obj)
