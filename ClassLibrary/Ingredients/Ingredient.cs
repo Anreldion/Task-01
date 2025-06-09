@@ -13,7 +13,7 @@ namespace ClassLibrary.Ingredients
         public Ingredient(string name, double calorie, double price, double weight)
         {
             Guard.NotNull(name, nameof(name));
-            Guard.AgainstNegative(calorie,nameof(calorie));
+            Guard.AgainstNegative(calorie, nameof(calorie));
             Guard.AgainstNegative(price, nameof(price));
             Guard.AgainstNegative(weight, nameof(weight));
 
@@ -26,7 +26,7 @@ namespace ClassLibrary.Ingredients
         /// <summary>
         /// Gets or sets the name of the ingredient.
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the caloric value per 1 unit of weight.
@@ -48,7 +48,7 @@ namespace ClassLibrary.Ingredients
         /// </summary>
         public object Clone()
         {
-            return new Ingredient(Name, Calorie, Price, Weight);
+            return new Ingredient(new string(Name), Calorie, Price, Weight);
         }
 
         public override string ToString()
@@ -64,7 +64,7 @@ namespace ClassLibrary.Ingredients
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
-            return obj is Ingredient item && item.Name == Name && 
+            return obj is Ingredient item && item.Name == Name &&
                    Math.Abs(item.Calorie - Calorie) < 0.01 &&
                    Math.Abs(item.Price - Price) < 0.01 &&
                    Math.Abs(item.Weight - Weight) < 0.01;
