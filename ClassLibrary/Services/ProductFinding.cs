@@ -11,26 +11,28 @@ namespace ClassLibrary.Services
     /// </summary>
     public class ProductFinding : IProductFinding
     {
-        private const double Tolerance = 0.01;
+        private const double Tolerance = 0.1;
 
         /// <summary>
         /// Finds all baked products that have the same price and calories as the given reference referenceProduct.
         /// Uses a small tolerance to account for floating-point precision.
         /// </summary>
         /// <param name="products">The array of baked products to search.</param>
-        /// <param name="referenceProduct">The reference referenceProduct to compare against.</param>
+        /// <param name="price"></param>
+        /// <param name="calories"></param>
         /// <returns>
         /// An array of baked products whose total price and caloric content 
         /// are within a small tolerance of the reference referenceProduct.
         /// </returns>
-        public BakedProduct[] FindByPriceAndCalories(BakedProduct[] products, BakedProduct referenceProduct)
+        public BakedProduct[] FindByPriceAndCalories(BakedProduct[] products, double price, double calories)
         {
-            Guard.NotNull(products,nameof(products));
-            Guard.NotNull(referenceProduct, nameof(referenceProduct));
+            Guard.NotNull(products, nameof(products));
+            Guard.AgainstNegative(price, nameof(price));
+            Guard.AgainstNegative(calories, nameof(calories));
 
             return products.Where(x =>
-                Math.Abs(x.GetPrice() - referenceProduct.GetPrice()) < Tolerance &&
-                Math.Abs(x.GetCalories() - referenceProduct.GetCalories()) < Tolerance).ToArray();
+                Math.Abs(x.GetPrice() - price) < Tolerance &&
+                Math.Abs(x.GetCalories() - calories) < Tolerance).ToArray();
         }
 
         /// <summary>
