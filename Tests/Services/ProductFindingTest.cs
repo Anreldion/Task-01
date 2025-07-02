@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Linq;
-using ClassLibrary.enums;
-using ClassLibrary.Ingredients;
-using ClassLibrary.Products;
 using ClassLibrary.Services;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using Tests.Shared;
 
 namespace Tests.Services;
@@ -22,8 +18,6 @@ public class ProductFindingTest
     {
         _service = new ProductFinding();
     }
-
-    // ---------- FindByPriceAndCalories ----------
 
     [Test]
     public void FindByPriceAndCalories_ReturnsMatchingProducts()
