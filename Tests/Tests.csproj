@@ -23,7 +23,7 @@
   <ItemGroup>
     <Folder Include="Ingredients\" />
     <Folder Include="Products\" />
-    <Folder Include="Services\" />
+    <Folder Include="TestResults\" />
     <Folder Include="Utilities\" />
   </ItemGroup>
   
